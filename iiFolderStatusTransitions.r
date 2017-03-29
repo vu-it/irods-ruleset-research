@@ -31,15 +31,6 @@ iiFolderTransition(*path, *currentStatus, *newStatus) {
 		if (*status != 0) {
 			failmsg(-1110000, "Rollback needed");
 		}
-	} else if (*currentStatus == UNPROTECTED && *newStatus == SUBMITTED) {
-		# protect the folder.
-		iiFolderLockChange(*path, "protect", true, *status);
-		if (*status != 0) {
-			failmsg(-1110000, "Rollback needed");
-		}
-	} else if (*currentStatus == PROTECTED && *newStatus == SUBMITTED) {
-		# nothing to do
-		succeed;
 	}
 }
 
@@ -57,14 +48,6 @@ iiFolderUnprotect(*folder) {
 	*status_str = UUORGMETADATAPREFIX ++ "status=" ++ UNPROTECTED;
 	msiString2KeyValPair(*status_str, *statuskvp);
 	msiSetKeyValuePairsToObj(*statuskvp, *folder, "-C");	
-}
-
-# \brief iiFolderSubmit
-# \param[in] folder	path of folder to submit to vault 
-iiFolderSubmit(*folder) {
-	*status_str = UUORGMETADATAPREFIX ++ "status=" ++ SUBMITTED;
-	msiString2KeyValPair(*status_str, *statuskvp);
-	msiSetKeyValuePairsToObj(*statuskvp, *folder, "-C");
 }
 
 # \brief iiFolderLockChange
