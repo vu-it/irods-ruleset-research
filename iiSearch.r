@@ -12,7 +12,7 @@ iiSearchByName(*startpath, *searchstring, *collectionOrDataObject, *orderby, *as
 	*iscollection = iscollection(*collectionOrDataObject);
 	if (*iscollection) {
 		*fields = list("COLL_PARENT_NAME", "COLL_ID", "COLL_NAME", "COLL_MODIFY_TIME", "COLL_CREATE_TIME");
-		*conditions = list(uumakelikecondition("COLL_NAME", *searchstring));
+		*conditions = list(uumakelikecollcondition("COLL_NAME", *searchstring));
 		*conditions = cons(uumakestartswithcondition("COLL_PARENT_NAME", *startpath), *conditions);
 		uuPaginatedQuery(*fields, *conditions, *orderby, *ascdesc, *limit, *offset, *rowList);
 		iiKvpCollectionTemplate(*rowList, *kvpList);
@@ -104,7 +104,7 @@ iiSearchByMetadata(*startpath, *searchstring, *collectionOrDataObject, *orderby,
 # \param[out] result		List of results in JSON format
 iiSearchByOrgMetadata(*startpath, *searchstring, *attrname, *orderby, *ascdesc, *limit, *offset, *result) {
 
-	*attr = UUORGMETADATAPREFIX ++ "*attrname";
+	*attr = UUORGMETADATAPREFIX ++ *attrname;
 	*fields = list("COLL_PARENT_NAME", "COLL_ID", "COLL_NAME", "COLL_MODIFY_TIME", "COLL_CREATE_TIME");
 	*conditions = list(uumakelikecondition("META_COLL_ATTR_VALUE", *searchstring));
 	*conditions = cons(uucondition("META_COLL_ATTR_NAME", "=", *attr), *conditions);

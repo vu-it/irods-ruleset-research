@@ -17,7 +17,7 @@
 			<mandatory>true</mandatory>
 		</Project_Description>
 		<Primary_Investigator>
-			<label>(Optional) Name Principal Investigator(s)</label>
+			<label>Name Principal Investigator(s)</label>
 			<help>The title of your Research Project</help>
 			<mandatory>true</mandatory>
 		</Primary_Investigator>
@@ -113,7 +113,7 @@
 			<mandatory>true</mandatory>
 		</Dataset_Title>
 		<Dataset_Description>
-			<label>Dataset_Description</label>
+			<label>Dataset Description</label>
 			<help>A description of your dataset</help>
 			<mandatory>true</mandatory>
 		</Dataset_Description>
@@ -212,7 +212,7 @@
 			<help>(Optional) Persitent Identifier contribitor (e.g. an ORCID, DAI, of ScopusID)</help>
 		</PID_Contributor>
 		<Unit_Analysis>
-			<label>Unit_of Analysis</label>
+			<label>Unit of Analysis</label>
 			<help>(Optional) Unit of analysis of the dataset</help>
 		</Unit_Analysis>
 		<Location_Covered>
@@ -293,7 +293,7 @@
 		</URL_Indicator>
 		<Number_of_files>
 			<label>No. Of Files</label>
-			<help>The number of files of the datapackage. The field will be automatically set.</help>
+			<help>The number of files of the datapackage.</help>
 			<mandatory>true</mandatory>
 		</Number_of_files>
 
@@ -343,7 +343,7 @@
 		<Dataset_Access>
 			<label>Dataset access</label>
 			<help>Once archived, how is your dataset accessible to third parties?</help>
-			<default>Free</default>
+			<default>Open</default>
 			<mandatory>true</mandatory>
 		</Dataset_Access>
 		<Dataset_location>
