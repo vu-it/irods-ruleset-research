@@ -137,6 +137,26 @@
             <help>Persistent identifier (e.g. an ORCID, DAI, or ScopusID)</help>
           </Name_Identifier>
         </Identifier_Person>
+       <Affiliation2>
+          <label>Affiliation2</label>
+          <help>The organizational or institutional affiliation of the creator</help>
+          <default>Utrecht University</default>
+        </Affiliation2>
+         <Identifier_Person2 class="compound">
+          <Name_Identifier_Scheme>
+            <label>Type of Persistent Identifier2</label>
+            <help>What type of persistent person identifier</help>
+          </Name_Identifier_Scheme>
+          <Name_Identifier>
+            <label>Identifier2</label>
+            <help>Persistent identifier (e.g. an ORCID, DAI, or ScopusID)</help>
+          </Name_Identifier>
+        </Identifier_Person2>
+       <Affiliation3>
+          <label>Affiliation3</label>
+          <help>The organizational or institutional affiliation of the creator</help>
+          <default>Utrecht University</default>
+        </Affiliation3>
       </Properties>
     </Creator>
     <Contributor>
