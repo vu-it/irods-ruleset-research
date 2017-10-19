@@ -127,7 +127,7 @@
           <help>The organizational or institutional affiliation of the creator</help>
           <default>Utrecht University</default>
         </Affiliation>
-         <Person_Identifier class="compound">
+         <Identifier_Person class="compound">
           <Name_Identifier_Scheme>
             <label>Type of Persistent Identifier</label>
             <help>What type of persistent person identifier</help>
@@ -136,7 +136,77 @@
             <label>Identifier</label>
             <help>Persistent identifier (e.g. an ORCID, DAI, or ScopusID)</help>
           </Name_Identifier>
-        </Person_Identifier>
+        </Identifier_Person>
+       <Affiliation2>
+          <label>Affiliation2</label>
+          <help>The organizational or institutional affiliation of the creator</help>
+          <default>Utrecht University</default>
+        </Affiliation2>
+         <Identifier_Person2 class="compound">
+          <Name_Identifier_Scheme>
+            <label>Type of Persistent Identifier2</label>
+            <help>What type of persistent person identifier</help>
+          </Name_Identifier_Scheme>
+          <Name_Identifier>
+            <label>Identifier2</label>
+            <help>Persistent identifier (e.g. an ORCID, DAI, or ScopusID)</help>
+          </Name_Identifier>
+        </Identifier_Person2>
+       <Affiliation3>
+          <label>Affiliation3</label>
+          <help>The organizational or institutional affiliation of the creator</help>
+          <default>Utrecht University</default>
+        </Affiliation3>
+	<Collect class="compound">
+          <Name11>
+            <label>Name01</label>
+            <help>What type of persistent person identifier</help>
+          </Name11>
+          <Name12>
+            <label>Name02</label>
+            <help>What type of persistent person identifier</help>
+          </Name12>
+	</Collect>
+         <Collect1 class="compound">
+          <Name11>
+            <label>Name11</label>
+            <help>What type of persistent person identifier</help>
+          </Name11>
+          <Name12>
+            <label>Name12</label>
+            <help>What type of persistent person identifier</help>
+          </Name12>
+	</Collect1>      
+        <Collect2 class="compound">
+          <Name11>
+            <label>Name21</label>
+            <help>What type of persistent person identifier</help>
+          </Name11>
+          <Name12>
+            <label>Name22</label>
+            <help>What type of persistent person identifier</help>
+          </Name12>
+        </Collect2>
+        <Collect3 class="compound">
+          <Name11>
+            <label>Name31</label>
+            <help>What type of persistent person identifier</help>
+          </Name11>
+          <Name12>
+            <label>Name32</label>
+            <help>What type of persistent person identifier</help>
+          </Name12>
+        </Collect3>
+        <Collect4 class="compound">
+          <Name11>
+            <label>Name41</label>
+            <help>What type of persistent person identifier</help>
+          </Name11>
+          <Name12>
+            <label>Name42</label>
+            <help>What type of persistent person identifier</help>
+          </Name12>
+        </Collect4>
       </Properties>
     </Creator>
     <Contributor>
@@ -155,7 +225,7 @@
           <help>The organizational or institutional affiliation of the creator</help>
           <default>Utrecht University</default>
         </Affiliation>
-        <Person_Identifier class="compound">
+        <Identifier_Person class="compound">
           <Name_Identifier_Scheme>
             <label>Type of Persistent Identifier</label>
             <help>What type of persistent person identifier</help>
@@ -164,7 +234,7 @@
             <label>Persistent Identifier</label>
             <help>Persistent identifier of contributor (e.g. an ORCID, DAI, or ScopusID)</help>
           </Name_Identifier>
-        </Person_Identifier>
+        </Identifier_Person>
       </Properties>
     </Contributor>
     <License>

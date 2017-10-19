@@ -29,7 +29,7 @@
         <xs:element name="Related_Datapackage" minOccurs="0" maxOccurs="unbounded">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Relation_Type" type="optionsRelationType" minOccurs="0" maxOccurs="unbounded"/>
+              <xs:element name="Relation_Type" type="optionsRelationType" minOccurs="0" maxOccurs="1"/>
               <xs:element name="Properties">
                 <xs:complexType>
                   <xs:sequence>
@@ -75,11 +75,61 @@
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="Affiliation" type="stringNormal" minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element name="Person_Identifier" minOccurs="0" maxOccurs="unbounded">
+                    <xs:element name="Identifier_Person" minOccurs="0" maxOccurs="unbounded">
                       <xs:complexType>
                         <xs:sequence>
                           <xs:element name="Name_Identifier_Scheme" type="optionsNameIdentifierScheme" minOccurs="0" maxOccurs="1"/>
                           <xs:element name="Name_Identifier" type="stringNormal" minOccurs="0" maxOccurs="1"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+		    <xs:element name="Affiliation2" type="stringNormal" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="Identifier_Person2" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Name_Identifier_Scheme" type="optionsNameIdentifierScheme" minOccurs="0" maxOccurs="1"/>
+                          <xs:element name="Name_Identifier" type="stringNormal" minOccurs="0" maxOccurs="1"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Affiliation3" type="stringNormal" minOccurs="0" maxOccurs="unbounded"/>
+		    <xs:element name="Collect" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Name11" type="stringNormal" minOccurs="0" maxOccurs="1"/>
+                          <xs:element name="Name12" type="optionsDataClassification" minOccurs="0" maxOccurs="1"/>		
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Collect1" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Name11" type="stringNormal" minOccurs="0" maxOccurs="1"/>
+                          <xs:element name="Name12" type="stringNormal" minOccurs="0" maxOccurs="1"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Collect2" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Name11" type="optionsDataClassification" minOccurs="0" maxOccurs="1"/>
+                          <xs:element name="Name12" type="stringNormal" minOccurs="0" maxOccurs="1"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Collect3" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Name11" type="stringNormal" minOccurs="0" maxOccurs="1"/>
+                          <xs:element name="Name12" type="stringNormal" minOccurs="0" maxOccurs="1"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Collect4" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Name11" type="stringNormal" minOccurs="0" maxOccurs="1"/>
+                          <xs:element name="Name12" type="optionsDataClassification" minOccurs="0" maxOccurs="1"/>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
@@ -98,7 +148,7 @@
                   <xs:sequence>
                     <xs:element name="Contributor_Type" type="optionsContributorType" minOccurs="0" maxOccurs="1"/>
                     <xs:element name="Affiliation" type="stringNormal" minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element name="Person_Identifier" minOccurs="0" maxOccurs="unbounded">
+                    <xs:element name="Identifier_Person" minOccurs="0" maxOccurs="unbounded">
                       <xs:complexType>
                         <xs:sequence>
                           <xs:element name="Name_Identifier_Scheme" type="optionsNameIdentifierScheme" minOccurs="0" maxOccurs="1"/>
@@ -114,7 +164,7 @@
         </xs:element>
         <xs:element name="License" type="optionsLicense" minOccurs="0" maxOccurs="1"/>
         <xs:element name="Data_Access_Restriction" type="optionsDataAccessRestriction" minOccurs="0" maxOccurs="1"/>
-        <xs:element name="System" minOccurs="0" maxOccurs="1">
+        <xs:element name="system" minOccurs="0" maxOccurs="1">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Last_Modified_Date" type="xs:date" minOccurs="0" maxOccurs="1"/>
