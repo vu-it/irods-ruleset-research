@@ -114,6 +114,51 @@ acPreProcForObjRename(*src, *dst) {
 	}
 }
 
+# This policy is triggered after a rename/move of a collection or dataObject
+acPostProcForObjRename(*src, *dst) {
+	# When the destination is in a research group, but the source is outside this group,
+	# we need to check if the destination research group has own rights.
+	on(*dst like regex "/[^/]+/home/" ++ IIGROUPPREFIX ++ ".[^/]*/.*") {
+		*dstPathElems = split(*dst, '/');
+		*dstResearchGroup = elem(*dstPathElems, 2);
+		*srcPathElems = split(*src, '/');
+		*srcGroup = elem(*srcPathElems, 2);
+		if (*dstResearchGroup == *srcGroup) {
+			#DEBUG writeLine("serverLog", "acPostProcForObjRename: nothing to do. Source and destination group are the same: *srcGroup");
+			succeed;
+		}
+
+		foreach(*row in SELECT USER_ID WHERE USER_NAME = *dstResearchGroup) {
+			*dstResearchGroupId = *row.USER_ID;
+		}
+		#DEBUG writeLine("serverLog", "acPostProcForObjRename: *dstResearchGroup has USER_ID *dstResearchGroupId");
+
+		*hasOwn = false;
+		msiGetObjType(*dst, *objType);
+
+		if (*objType == "-c") {
+			*recursiveFlag = "recursive";
+			foreach(*row in SELECT COLL_ID WHERE COLL_NAME = *dst 
+							 AND COLL_ACCESS_USER_ID = *dstResearchGroupId
+							 AND COLL_ACCESS_NAME = 'own') {
+				*hasOwn = true;
+			}
+		} else {
+			uuChopPath(*dst, *collName, *dataName);
+			*recursiveFlag = "default";
+			foreach(*row in SELECT DATA_ID WHERE COLL_NAME = *collName
+                                                         AND DATA_NAME = *dataName
+							 AND DATA_ACCESS_USER_ID = *dstResearchGroupId
+							 AND DATA_ACCESS_NAME = 'own') {
+				*hasOwn = true;
+			}			
+		}
+
+		if (!*hasOwn) {
+			iiCopyACLsFromParent(*dst, *recursiveFlag);
+		}
+	}
+}
 
 # This policy is fired before a data object is opened.
 # The policy does not prohibit opening data objects for reading,
@@ -142,11 +187,7 @@ acPreprocForDataObjOpen {
 # This policy is fired if AVU meta data is copied from one object to another.
 # Copying of metadata is prohibited by this policy if the target object is locked
 acPreProcForModifyAVUMetadata(*Option,*SourceItemType,*TargetItemType,*SourceItemName,*TargetItemName) {
-	on (
-	(*SourceItemType == "-C" || *SourceItemType == "-d")
-	&& (*SourceItemName like regex "/[^/]+/home/" ++ IIGROUPPREFIX ++ ".*"
-	|| *TargetItemName like regex "/[^/]+/home/" ++ IIGROUPPREFIX ++ ".*")
-	) {
+	on ((*SourceItemType == "-C" || *SourceItemType == "-d") && (*SourceItemName like regex "/[^/]+/home/" ++ IIGROUPPREFIX ++ ".*" || *TargetItemName like regex "/[^/]+/home/" ++ IIGROUPPREFIX ++ ".*")) {
 
 		uuGetUserType(uuClientFullName, *userType);
 		if (*userType == "rodsadmin") {
@@ -163,8 +204,7 @@ acPreProcForModifyAVUMetadata(*Option,*SourceItemType,*TargetItemType,*SourceIte
 
 # This policy is fired when AVU metadata is added or set.
 acPreProcForModifyAVUMetadata(*option, *itemType, *itemName, *attributeName, *attributeValue, *attributeUnit) {
-	on (*attributeName like UUUSERMETADATAPREFIX ++ "*" 
-	    && *itemName like regex "/[^/]+/home/" ++ IIGROUPPREFIX ++ ".*") {
+	on (*attributeName like UUUSERMETADATAPREFIX ++ "*" && *itemName like regex "/[^/]+/home/" ++ IIGROUPPREFIX ++ ".*") {
 		uuGetUserType(uuClientFullName, *userType);
 		if (*userType == "rodsadmin") {
 			succeed;
@@ -335,40 +375,19 @@ uuResourceModifiedPostResearch(*pluginInstanceName, *KVPairs) {
 	}
 }
 
-acPostProcForObjRename(*src, *dst) {
-	on(*dst like regex "/[^/]+/home/" ++ IIGROUPPREFIX ++ ".[^/]*/.*") {
-		# enforce research group ACL's on folder moved from outside of research group
-		*srcPathElems = split(*src, "/");
-		*dstPathElems = split(*dst, "/");		
-		#DEBUG writeLine("serverLog", "acPostProcForObjRename: *src -> *dst");
-		if (elem(*srcPathElems, 2) != elem(*dstPathElems, 2)) {
-			uuEnforceGroupAcl(*dst);
-		}
-	}
-
-}
-
-# \brief uuResourceRenamePostResearch    This policy is created to support the moving, renaming and trashing of the .yoda-metadata.xml file as well as enforcing group ACL's when collections or data objects are moved from outside a research group into it
+# This policy is created to support the moving, renaming and trashing of the .yoda-metadata.xml file
 # \param[in] pluginInstanceName   a copy of $pluginInstanceName
 # \param[in] KVPairs  a copy of $KVPairs
 uuResourceRenamePostResearch(*pluginInstanceName, *KVPairs) {
 	# example match "/mnt/irods01/vault01/home/research-any/possible/path/to/yoda-metadata.xml"
-	#DEBUG writeLine("serverLog", "pep_resource_rename_post:\n \$KVPairs = *KVPairs\n\$pluginInstanceName = *pluginInstanceName");
-	*zone = *KVPairs.client_user_zone;
-	*dst = *KVPairs.logical_path;
-	iiLogicalPathFromPhysicalPath(*KVPairs.physical_path, *src, *zone);
-
-	if (*dst like regex "/[^/]+/home/" ++ IIGROUPPREFIX ++ ".*") {
-		*srcPathElems = split(*src, "/");
-		*dstPathElems = split(*dst, "/");		
-		
-		if (elem(*srcPathElems, 2) != elem(*dstPathElems, 2)) {
-			uuEnforceGroupAcl(*dst);
-		}
-	
-	}
-
-	if (*src like regex "/[^/]+/home/" ++ IIGROUPPREFIX ++ ".*/" ++ IIMETADATAXMLNAME ++ "$") {
+	if (*KVPairs.physical_path like regex ".\*/home/"
+	    ++ IIGROUPPREFIX
+	    ++ "[^/]+(/.\*)\*/"
+	    ++ IIMETADATAXMLNAME ++ "$") {
+		#DEBUG writeLine("serverLog", "pep_resource_rename_post:\n \$KVPairs = *KVPairs\n\$pluginInstanceName = *pluginInstanceName");
+		*zone =  *KVPairs.client_user_zone;
+		*dst = *KVPairs.logical_path;
+		iiLogicalPathFromPhysicalPath(*KVPairs.physical_path, *src, *zone);
 		iiMetadataXmlRenamedPost(*src, *dst, *zone);
 
 	}
@@ -389,3 +408,5 @@ uuResourceUnregisteredPostResearch(*pluginInstanceName, *KVPairs) {
 		iiMetadataXmlUnregisteredPost(*KVPairs.logical_path);
 		}
 }
+
+
