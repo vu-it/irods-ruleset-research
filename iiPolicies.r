@@ -114,6 +114,58 @@ acPreProcForObjRename(*src, *dst) {
 	}
 }
 
+# This policy is triggered after a rename/move of a collection or dataObject
+acPostProcForObjRename(*src, *dst) {
+	# When the destination is in a research group, but the source is outside this group,
+	# we need to check if the destination research group has own rights.
+	on(*dst like regex "/[^/]+/home/" ++ IIGROUPPREFIX ++ ".[^/]*/.*") {
+		#DEBUG writeLine("serverLog", "acPostProcForObjRename: (Research) *src -> *dst");
+		*dstPathElems = split(*dst, '/');
+		*dstGroup = elem(*dstPathElems, 2);
+		*rodsZone =  elem(*dstPathElems, 0);
+		*srcPathElems = split(*src, '/');
+		*srcGroup = elem(*srcPathElems, 2);
+
+		if (*dstGroup == *srcGroup) {
+			#DEBUG writeLine("serverLog", "acPostProcForObjRename: nothing to do. Source and destination group are the same: *srcGroup");
+			succeed;
+		}
+
+		uuAclListOfPath(*dst, *dstAclList);
+		#DEBUG writeLine("serverLog", "dstAclList: *dstAclList");
+		uuAclListOfPath("/*rodsZone/home/*dstGroup", *groupAclList);
+		#DEBUG writeLine("serverLog", "groupAclList: *groupAclList");
+		uuAclListSetDiff(*dstAclList, *groupAclList, *aclsToRemove);
+		#DEBUG writeLine("serverLog", "aclsToRemove: *aclsToRemove");
+		uuAclListSetDiff(*groupAclList, *dstAclList, *aclsToAdd);
+		#DEBUG writeLine("serverLog", "aclsToAdd: *aclsToAdd");
+		*idsToAdd = uuids(*aclsToAdd);
+
+		msiGetObjType(*dst, *objType);
+		*recurse = if *objType == "-c" then "recursive" else "default"
+		 
+		foreach(*acl in *aclsToAdd) {
+			uuAclToStrings(*acl, *userName, *accessLevel);
+			#DEBUG writeLine("serverLog", "acPostProcForObjRename: Setting ACL *accessLevel *userName *dst");
+			msiSetACL(*recurse, *accessLevel, *userName, *dst);
+		}
+		
+		foreach(*acl in *aclsToRemove) {
+			uuacl(*userId, *accessType) = *acl;
+			if (!uuinlist(*userId, *idsToAdd)) {
+				uuAclToStrings(*acl, *userName, *accessLevel);
+				#DEBUG writeLine("serverLog", "acPostProcForObjRename: Removing ACL *accessLevel *userName *dst");
+				msiSetACL(*recurse, "null", *userName, *dst);	
+			}
+		}
+	}
+
+	on(true) {
+		nop;
+		#DEBUG writeLine("serverLog", "acPostProcForObjRename: *src -> *dst");
+	}
+}
+
 # This policy is fired before a data object is opened.
 # The policy does not prohibit opening data objects for reading,
 # but if the data object is locked, opening for writing is 
@@ -362,5 +414,4 @@ uuResourceUnregisteredPostResearch(*pluginInstanceName, *KVPairs) {
 		iiMetadataXmlUnregisteredPost(*KVPairs.logical_path);
 		}
 }
-
 
