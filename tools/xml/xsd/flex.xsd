@@ -13,20 +13,20 @@
             <xs:sequence>
               <xs:element name="Start_Date" minOccurs="0" maxOccurs="1">
 	          <xs:complexType>
-        	        <xs:sequence>
+        	        <xs:choice>
                 	        <xs:element name="Start_Date_YYYY_MM_DD" type="xs:date" minOccurs="0" maxOccurs="1"/>
                         	<xs:element name="Start_Date_YYYY" type="xs:gYear" minOccurs="0" maxOccurs="1"/>
                         	<xs:element name="Start_Date_YYYY_MM" type="xs:gYearMonth" minOccurs="0" maxOccurs="1"/>
-                	</xs:sequence>
+                	</xs:choice>
          	 </xs:complexType>
 	      </xs:element>	
               <xs:element name="End_Date" minOccurs="0" maxOccurs="1">
                   <xs:complexType>
-                        <xs:sequence>
+                        <xs:choice>
                                 <xs:element name="End_Date_YYYY_MM_DD" type="xs:date" minOccurs="0" maxOccurs="1"/>
                                 <xs:element name="End_Date_YYYY" type="xs:gYear" minOccurs="0" maxOccurs="1"/>
                                 <xs:element name="End_Date_YYYY_MM" type="xs:gYearMonth" minOccurs="0" maxOccurs="1"/>
-                        </xs:sequence>
+                        </xs:choice>
                  </xs:complexType>
 	      </xs:element>	
             </xs:sequence>
@@ -68,11 +68,11 @@
         <xs:element name="Retention_Information" type="stringNormal" minOccurs="0" maxOccurs="1"/>
         <xs:element name="Embargo_End_Date" minOccurs="0" maxOccurs="unbounded">
 	  <xs:complexType>
-		<xs:sequence>
+		<xs:choice>
 			<xs:element name="Embargo_End_Date_YYYY_MM_DD" type="xs:date" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="Embargo_End_Date_YYYY" type="xs:gYear" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="Embargo_End_Date_YYYY_MM" type="xs:gYearMonth" minOccurs="0" maxOccurs="1"/>
-		</xs:sequence>	
+		</xs:choice>	
 	  </xs:complexType>
 	</xs:element>
         <xs:element name="Data_Classification" type="optionsDataClassification" minOccurs="0" maxOccurs="1"/>
@@ -100,11 +100,11 @@
                   <xs:sequence>
 		    <xs:element name="TheDate" minOccurs="0" maxOccurs="1">
                      <xs:complexType>
-                        <xs:sequence>
+                        <xs:choice>
                                 <xs:element name="TheDate_YYYY_MM_DD" type="xs:date" minOccurs="0" maxOccurs="1"/>
                                 <xs:element name="TheDate_YYYY" type="xs:gYear" minOccurs="0" maxOccurs="1"/>
                                 <xs:element name="TheDate_YYYY_MM" type="xs:gYearMonth" minOccurs="0" maxOccurs="1"/>
-                        </xs:sequence>
+                        </xs:choice>
                      </xs:complexType>
                     </xs:element>
 
