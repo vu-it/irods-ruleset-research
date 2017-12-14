@@ -6,6 +6,11 @@
       <help>The title of your data package</help>
       <mandatory>true</mandatory>
     </Title>
+    <geoLocation geoLocation='openStreetMap'>
+	<label>Geo Location</label>
+	<help>Prsent the geoLocation</help>
+	<mandatory>true</mandatory>
+    </geoLocation>
     <Description>
       <label>Description</label>
       <help>A description of your data package</help>
@@ -68,6 +73,10 @@
           <help>Title of the related data package</help>
           <mandatory>true</mandatory>
         </Title>
+    	<geoSub geoLocation='openStreetMap'>
+        	<label>Geo Location</label>
+        	<help>Prsent the geoLocation</help>
+	</geoSub>
         <Persistent_Identifier class="compound">
 	  <label>Persistent Identifier</label>	
           <Identifier_Scheme>
