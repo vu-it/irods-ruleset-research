@@ -37,10 +37,10 @@
         <label>Start Date</label>
         <help>Indicate when you've started collecting the data for this data package (YYYY-MM-DD)</help>
       </Start_Date>
-      <End_Date flexdate="true">
-        <label>End Date</label>
-        <help>Indicate when you've finished collecting the data for this data package (YYYY-MM-DD)</help>
-      </End_Date>
+      <geoSub2 geoLocation='openStreetMap'>
+                <label>Geo Location</label>
+                <help>Prsent the geoLocation</help>
+      </geoSub2>
     </Collected>
     <Covered_Geolocation_Place>
       <label>Location(s) covered</label>
