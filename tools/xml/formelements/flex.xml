@@ -33,10 +33,10 @@
     <Collected class="compound">
       <label>Collection process</label>
       <help>Indicate when collecting the data for this data package started and ended</help>
-      <Start_Date flexdate='true'>
-        <label>Start Date</label>
-        <help>Indicate when you've started collecting the data for this data package (YYYY-MM-DD)</help>
-      </Start_Date>
+      <geoSub21 geoLocation='openStreetMap'>
+                <label>Geo Location</label>
+                <help>Prsent the geoLocation</help>
+      </geoSub21>
       <geoSub2 geoLocation='openStreetMap'>
                 <label>Geo Location</label>
                 <help>Prsent the geoLocation</help>

@@ -21,15 +21,16 @@
         <xs:element name="Collected" minOccurs="0" maxOccurs="unbounded">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Start_Date" minOccurs="0" maxOccurs="1">
-	          <xs:complexType>
-        	        <xs:choice>
-                	        <xs:element name="Start_Date_YYYY_MM_DD" type="xs:date" minOccurs="0" maxOccurs="1"/>
-                        	<xs:element name="Start_Date_YYYY" type="xs:gYear" minOccurs="0" maxOccurs="1"/>
-                        	<xs:element name="Start_Date_YYYY_MM" type="xs:gYearMonth" minOccurs="0" maxOccurs="1"/>
-                	</xs:choice>
-         	 </xs:complexType>
-	      </xs:element>	
+              <xs:element name="geoSub21"  minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="westBoundLongitude" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
+                    <xs:element name="eastBoundLongitude" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
+                    <xs:element name="southBoundLatitude" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
+                    <xs:element name="northBoundLatitude" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
               <xs:element name="geoSub2"  minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
                   <xs:sequence>
