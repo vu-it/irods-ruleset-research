@@ -4,7 +4,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element name="Title" type="stringNormal" minOccurs="0" maxOccurs="1"/>
-	<xs:element name="geoLocation"  minOccurs="0" maxOccurs="unbounded">
+	<xs:element name="geoLocation"  minOccurs="0" maxOccurs="1">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="westBoundLongitude" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
@@ -18,31 +18,6 @@
         <xs:element name="Discipline" type="optionsDiscipline" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element name="Version" type="stringNormal" minOccurs="0" maxOccurs="1"/>
         <xs:element name="Language" type="optionsISO639-1" minOccurs="0" maxOccurs="1"/>
-        <xs:element name="Collected" minOccurs="0" maxOccurs="unbounded">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element name="Start_Date" minOccurs="0" maxOccurs="1">
-	          <xs:complexType>
-        	        <xs:choice>
-                	        <xs:element name="Start_Date_YYYY_MM_DD" type="xs:date" minOccurs="0" maxOccurs="1"/>
-                        	<xs:element name="Start_Date_YYYY" type="xs:gYear" minOccurs="0" maxOccurs="1"/>
-                        	<xs:element name="Start_Date_YYYY_MM" type="xs:gYearMonth" minOccurs="0" maxOccurs="1"/>
-                	</xs:choice>
-         	 </xs:complexType>
-	      </xs:element>	
-              <xs:element name="geoSub2"  minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="westBoundLongitude" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
-                    <xs:element name="eastBoundLongitude" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
-                    <xs:element name="southBoundLatitude" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
-                    <xs:element name="northBoundLatitude" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
         <xs:element name="Covered_Geolocation_Place" type="stringNormal" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element name="Covered_Period" minOccurs="0" maxOccurs="1">
           <xs:complexType>
@@ -61,7 +36,7 @@
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="Title" type="stringNormal" minOccurs="0" maxOccurs="1"/>
-        	    <xs:element name="geoSub"  minOccurs="0" maxOccurs="unbounded">
+        	    <xs:element name="geoSub"  minOccurs="0" maxOccurs="1">
                        <xs:complexType>
                          <xs:sequence>
                            <xs:element name="westBoundLongitude" type="xs:decimal" minOccurs="0" maxOccurs="1"/>

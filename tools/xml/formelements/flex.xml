@@ -30,18 +30,6 @@
       <help>The language the data package with iso639-1 two-letter code (e.g. en, nl, fr)</help>
       <default>en - English</default>
     </Language>
-    <Collected class="compound">
-      <label>Collection process</label>
-      <help>Indicate when collecting the data for this data package started and ended</help>
-      <Start_Date flexdate='true'>
-        <label>Start Date</label>
-        <help>Indicate when you've started collecting the data for this data package (YYYY-MM-DD)</help>
-      </Start_Date>
-      <geoSub2 geoLocation='openStreetMap'>
-                <label>Geo Location</label>
-                <help>Prsent the geoLocation</help>
-      </geoSub2>
-    </Collected>
     <Covered_Geolocation_Place>
       <label>Location(s) covered</label>
       <help>Indication of the geographical entities, like countries, regions and cities, covered with this data package (English naming convention preferred)</help>
