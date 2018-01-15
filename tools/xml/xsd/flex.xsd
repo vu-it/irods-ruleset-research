@@ -4,7 +4,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element name="Title" type="stringNormal" minOccurs="0" maxOccurs="1"/>
-	<xs:element name="geoLocation"  minOccurs="0" maxOccurs="1">
+	<xs:element name="geoLocation"  minOccurs="0" maxOccurs="unbounded">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="westBoundLongitude" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
@@ -36,7 +36,7 @@
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="Title" type="stringNormal" minOccurs="0" maxOccurs="1"/>
-        	    <xs:element name="geoSub"  minOccurs="0" maxOccurs="1">
+        	    <xs:element name="geoSub"  minOccurs="0" maxOccurs="unbounded">
                        <xs:complexType>
                          <xs:sequence>
                            <xs:element name="westBoundLongitude" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
