@@ -27,8 +27,8 @@
         <body>
         <div class="brandbar container">
             <div class="logo pull-left">
-                <a href="http://www.uu.nl">
-                    <img src="/static/img/logo-uu.svg" />
+                <a href="http://www.vu.nl">
+                    <img src="/static/img/VUlogo.png" />
                 </a>
             </div>
         </div>
