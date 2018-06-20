@@ -131,7 +131,7 @@
        <Affiliation>
           <label>Affiliation</label>
           <help>The organizational or institutional affiliation of the creator</help>
-          <default>Utrecht University</default>
+          <default>Vrije Universiteit</default>
           <mandatory>true</mandatory>
         </Affiliation>
          <Person_Identifier class="compound">
@@ -161,7 +161,7 @@
        <Affiliation>
           <label>Affiliation</label>
           <help>The organizational or institutional affiliation of the creator</help>
-          <default>Utrecht University</default>
+          <default>Vrije Universiteit</default>
           <mandatory>true</mandatory>
         </Affiliation>
          <Person_Identifier class="compound">
